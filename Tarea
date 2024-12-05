@@ -1,0 +1,54 @@
+"""
+Programa para graficar funciones, VERSION MODULAR
+Se usa en el método gráfico para determinar la raíz de una función.
+Prof. Alberto Varguez 
+IME BUAP
+Métodos Numéricos 
+ID 2023-U1-007
+"""
+
+import matplotlib.pyplot as plt
+import numpy as np
+import FUN  # Asegúrate de tener este módulo implementado
+
+# Apertura del archivo de salida
+f = open('Salida001.txt', 'w')
+
+# Datos para graficar
+t = np.arange(0, 5, 0.1)
+
+# Subprograma definido por el usuario
+# Debe devolver dos arrays/lists: s1 y s2
+s1, s2 = FUN.funciones(t)
+num = len(t)
+
+# Escritura de datos en consola y archivo
+for n in range(num):
+    print("{:10.4f}  {:10.4f}".format(t[n], s1[n]))
+    f.write("{:10.4f}  {:10.4f}\n".format(t[n], s1[n]))
+
+# Crear figura y eje para graficar
+fig1, ax1 = plt.subplots()
+
+# Activar cuadrícula
+ax1.grid(True)
+
+# Graficar las dos funciones
+ax1.plot(t, s1, color='blue', linestyle='solid', linewidth=2.5, label='f(x)')
+ax1.plot(t, s2, color='green', linestyle='solid', linewidth=2.5, label='fp(x)')
+
+# Configurar etiquetas de los ejes y título
+ax1.set(xlabel='valor en x', ylabel='f(x), fp(x)',
+        title='Comportamiento de la función')
+
+# Agregar leyendas
+ax1.legend(prop={'size': 10}, loc='lower left')
+
+# Guardar la gráfica como archivo
+fig1.savefig("GráficaEU003.png")
+
+# Mostrar la gráfica en pantalla
+plt.show()
+
+# Cerrar archivo
+f.close()
